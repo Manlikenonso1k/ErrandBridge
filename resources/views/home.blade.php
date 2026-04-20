@@ -3,11 +3,24 @@
 @section('title', 'ErrandBridge | Home')
 
 @section('content')
+@php
+  $assetUrl = static function (string $path): string {
+      $path = ltrim($path, '/');
+      $docRoot = realpath((string) request()->server('DOCUMENT_ROOT', ''));
+      $publicRoot = realpath(public_path());
+
+      if ($docRoot !== false && $publicRoot !== false && $docRoot === $publicRoot) {
+          return url($path);
+      }
+
+      return url('public/' . $path);
+  };
+@endphp
 <main class="main" id="top">
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
     <div class="container">
       <a class="navbar-brand" href="{{ route('home') }}">
-        <img src="{{ asset('assets/img/gallery/logo.png') }}" height="45" alt="logo" />
+        <img src="{{ $assetUrl('assets/img/gallery/logo.png') }}" height="45" alt="logo" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -25,11 +38,11 @@
   </nav>
 
   <section class="py-xxl-10 pb-0" id="home">
-    <div class="bg-holder bg-size" style="background-image:url({{ asset('assets/img/gallery/hero-header-bg.png') }});background-position:top center;background-size:cover;"></div>
+    <div class="bg-holder bg-size" style="background-image:url({{ $assetUrl('assets/img/gallery/hero-header-bg.png') }});background-position:top center;background-size:cover;"></div>
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-5 col-xl-6 col-xxl-7 order-0 order-md-1 text-end">
-          <img class="pt-7 pt-md-0 w-100" src="{{ asset('assets/img/illustrations/hero.png') }}" alt="hero-header" />
+          <img class="pt-7 pt-md-0 w-100" src="{{ $assetUrl('assets/img/illustrations/hero.png') }}" alt="hero-header" />
         </div>
         <div class="col-md-75 col-xl-6 col-xxl-5 text-md-start text-center py-8">
           <h1 class="fw-normal fs-6 fs-xxl-7">Launch your errands with</h1>
@@ -96,7 +109,7 @@
         <div class="col-md-4 pt-4 px-md-2 px-lg-3">
           <div class="card h-100 px-lg-5 card-span">
             <div class="card-body d-flex flex-column justify-content-around">
-              <div class="text-center pt-5"><img class="img-fluid" src="{{ asset('assets/img/icons/services-1.svg') }}" alt="..." />
+              <div class="text-center pt-5"><img class="img-fluid" src="{{ $assetUrl('assets/img/icons/services-1.svg') }}" alt="..." />
                 <h5 class="my-4">Business Services</h5>
               </div>
               <p>Offering home delivery around the city, where your products will be at your doorstep within 48-72 hours.</p>
@@ -111,7 +124,7 @@
         <div class="col-md-4 pt-4 px-md-2 px-lg-3">
           <div class="card h-100 px-lg-5 card-span">
             <div class="card-body d-flex flex-column justify-content-around">
-              <div class="text-center pt-5"><img class="img-fluid" src="{{ asset('assets/img/icons/services-2.svg') }}" alt="..." />
+              <div class="text-center pt-5"><img class="img-fluid" src="{{ $assetUrl('assets/img/icons/services-2.svg') }}" alt="..." />
                 <h5 class="my-4">Statewide Services</h5>
               </div>
               <p>Offering home delivery around the city, where your products will be at your doorstep within 48-72 hours.</p>
@@ -126,7 +139,7 @@
         <div class="col-md-4 pt-4 px-md-2 px-lg-3">
           <div class="card h-100 px-lg-5 card-span">
             <div class="card-body d-flex flex-column justify-content-around">
-              <div class="text-center pt-5"><img class="img-fluid" src="{{ asset('assets/img/icons/services-3.svg') }}" alt="..." />
+              <div class="text-center pt-5"><img class="img-fluid" src="{{ $assetUrl('assets/img/icons/services-3.svg') }}" alt="..." />
                 <h5 class="my-4">Personal Services</h5>
               </div>
               <p>You can trust us to safely deliver your most sensitive documents to the specific area in a short time.</p>
@@ -145,11 +158,11 @@
   <section class="pt-7 pb-0">
     <div class="container">
       <div class="row">
-        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ asset('assets/img/icons/awards.png') }}" alt="..." /><h1 class="text-primary mt-4">26+</h1><h5 class="text-800">Awards won</h5></div></div>
-        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ asset('assets/img/icons/states.png') }}" alt="..." /><h1 class="text-primary mt-4">65+</h1><h5 class="text-800">States covered</h5></div></div>
-        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ asset('assets/img/icons/clients.png') }}" alt="..." /><h1 class="text-primary mt-4">689K+</h1><h5 class="text-800">Happy clients</h5></div></div>
-        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ asset('assets/img/icons/goods.png') }}" alt="..." /><h1 class="text-primary mt-4">130M+</h1><h5 class="text-800">Goods delivered</h5></div></div>
-        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ asset('assets/img/icons/business.png') }}" alt="..." /><h1 class="text-primary mt-4">130M+</h1><h5 class="text-800">Business hours</h5></div></div>
+        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ $assetUrl('assets/img/icons/awards.png') }}" alt="..." /><h1 class="text-primary mt-4">26+</h1><h5 class="text-800">Awards won</h5></div></div>
+        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ $assetUrl('assets/img/icons/states.png') }}" alt="..." /><h1 class="text-primary mt-4">65+</h1><h5 class="text-800">States covered</h5></div></div>
+        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ $assetUrl('assets/img/icons/clients.png') }}" alt="..." /><h1 class="text-primary mt-4">689K+</h1><h5 class="text-800">Happy clients</h5></div></div>
+        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ $assetUrl('assets/img/icons/goods.png') }}" alt="..." /><h1 class="text-primary mt-4">130M+</h1><h5 class="text-800">Goods delivered</h5></div></div>
+        <div class="col-6 col-lg mb-5"><div class="text-center"><img src="{{ $assetUrl('assets/img/icons/business.png') }}" alt="..." /><h1 class="text-primary mt-4">130M+</h1><h5 class="text-800">Business hours</h5></div></div>
       </div>
     </div>
   </section>
@@ -157,7 +170,7 @@
   <section class="py-7">
     <div class="container-fluid">
       <div class="row flex-center">
-        <div class="bg-holder bg-size" style="background-image:url({{ asset('assets/img/gallery/quote.png') }});background-position:top;background-size:auto;margin-left:-270px;margin-top:-45px;"></div>
+        <div class="bg-holder bg-size" style="background-image:url({{ $assetUrl('assets/img/gallery/quote.png') }});background-position:top;background-size:auto;margin-left:-270px;margin-top:-45px;"></div>
         <div class="col-md-8 col-lg-5 text-center">
           <h5 class="text-danger">TESTIMONIAL</h5>
           <h2>Our Awesome Clients</h2>
@@ -175,7 +188,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5 col-xl-4">
-          <img src="{{ asset('assets/img/illustrations/callback.png') }}" alt="..." />
+          <img src="{{ $assetUrl('assets/img/illustrations/callback.png') }}" alt="..." />
           <h5 class="text-danger">REQUEST A CALLBACK</h5>
           <h2>We will contact in the shortest time.</h2>
           <p class="text-muted">Monday to Friday, 9am-5pm.</p>
@@ -202,7 +215,7 @@
         <div class="col-12">
           <div class="card card-span rounded-2 mb-3">
             <div class="row">
-              <div class="col-md-6 col-lg-7 d-flex"><img class="w-100 fit-cover rounded-md-start rounded-top rounded-md-top-0" src="{{ asset('assets/img/gallery/map.svg') }}" alt="map" /></div>
+              <div class="col-md-6 col-lg-7 d-flex"><img class="w-100 fit-cover rounded-md-start rounded-top rounded-md-top-0" src="{{ $assetUrl('assets/img/gallery/map.svg') }}" alt="map" /></div>
               <div class="col-md-6 col-lg-5 d-flex flex-center">
                 <div class="card-body">
                   <h5>Contact with us</h5>
@@ -221,7 +234,7 @@
   <section class="bg-900 pb-0 pt-5">
     <div class="container">
       <div class="row">
-        <div class="col-12 col-sm-12 col-lg-6 mb-4"><a class="text-decoration-none" href="#top"><img src="{{ asset('assets/img/gallery/footer-logo.png') }}" height="51" alt="" /></a>
+        <div class="col-12 col-sm-12 col-lg-6 mb-4"><a class="text-decoration-none" href="#top"><img src="{{ $assetUrl('assets/img/gallery/footer-logo.png') }}" height="51" alt="" /></a>
           <p class="text-500 my-4">The most trusted Courier<br />company in your area.</p>
         </div>
         <div class="col-12 text-center py-4">
