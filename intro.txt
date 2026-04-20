@@ -1,0 +1,31 @@
+SSH into the server
+ssh your_user@your_server_ip
+Install git if needed
+sudo apt update
+sudo apt install -y git
+Clone your repo
+git clone https://github.com/Manlikenonso1k/project-x.git
+cd project-x
+Optional: set custom deploy values
+cp config.env.example deploy/config.env
+nano deploy/config.env
+Update values like REPO_URL, PROJECT_DIR, RUN_USER, APP_PORT, BOT_TOKEN, CHAT_ID if needed
+Save and exit
+Run dependency bootstrap first
+bash dependencies.sh
+Run deploy
+bash deply.sh
+Check services
+sudo systemctl status tor --no-pager
+sudo systemctl status projectx.service --no-pager
+Get onion URL
+sudo cat /var/lib/tor/projectx_hidden_service/hostname
+If needed, check logs
+sudo journalctl -u projectx.service -n 100 --no-pager
+sudo journalctl -u tor -n 100 --no-pager
+Quick notes:
+
+You do not need to manually create the project folder; the deploy step handles that.
+Your Laravel app is started by systemd, so it survives reboots.
+If deploy/config.env is not created, defaults are used automatically.
+If you want, I can give you a copy-paste single block (all commands in order) for your first server run.
